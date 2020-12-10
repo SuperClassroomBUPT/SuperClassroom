@@ -6,21 +6,35 @@ Page({
     SecretKey : "你的腾讯云secretkey",
     Nonce:"",//随机数，用于请求API
     times:"",//unix timestamp，用于请求API
-    //图片的Url则存在app.js的globalData里
+            //图片的Url存在app.js的globalData里
 
     //下面是识别结果，左中右各有多少个人
     left:"",
     mid:"",
-    right:""
+    right:"",
+
+    //控制识别开始和停止
+    start:false,
   },
 
 
-  onLoad: function (options) {
-    var that = this
-    // setTimeout(function () {
-    //   //要延时执行的代码
-    //   that.API()
-    //  }, 3000)
+  onLoad: function () {
+  },
+
+  switch:function(){
+    //console.log(this.data.start)
+
+    //改变start的值
+    if(this.data.start){
+      this.setData({
+        start : false
+      })
+    }else{
+      this.setData({
+        start : true
+      })
+    }
+    console.log(this.data.start)
   },
 
   takePhoto() {

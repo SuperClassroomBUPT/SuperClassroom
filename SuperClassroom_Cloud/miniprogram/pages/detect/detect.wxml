@@ -1,9 +1,16 @@
 <camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
 <view style = "margin:5px"></view>
-<button type="primary" bindtap="takePhoto">拍照</button>
+<view>
+  <button type="primary" bindtap="switch">
+    <text wx:if="{{start}}">停止</text>
+    <text wx:if="!{{start}}">进行识别</text>
+  </button>
+</view>
+
+
 
 <view class="flex-column">
-  <view class="title">
+  <view class="title" >
     识别结果
   </view>
   <view class="lmr">
