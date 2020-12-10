@@ -29,12 +29,8 @@
         "selectedIconPath": "pages/ico/d1.png"
 
       },
-      {
-        "pagePath": "pages/index/index",
-        "text": "上课"
-      },
       {"pagePath": "pages/index/index",
-       "text": "食堂"
+       "text": "其他"
   }
     ]
   },
