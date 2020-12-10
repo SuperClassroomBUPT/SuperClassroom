@@ -1,0 +1,23 @@
+/* miniprogram/pages/detect/detect.wxss */
+.lmr{
+  line-height:60rpx;
+  text-align:center;
+  text-indent:0;
+  font-size: large;
+  font-weight: bold;
+}
+
+.center-vertical-horizon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx;
+}
+
+.title{
+  line-height:100rpx;
+  text-align:center;
+  text-indent:0;
+  font-size:xx-large;
+  font-weight: bold;
+}
