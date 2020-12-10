@@ -2,8 +2,8 @@
 var app = getApp();
 Page({
   data: {
-    SecretId : "AKIDrT1LRHz0Ytx58vBavDKxJsQidJ7v6aPS",
-    SecretKey : "wlJLBlCNJzXryqRt40gCk0C8mPkCP8qH",
+    SecretId : "你的腾讯云secretkeysecretid",
+    SecretKey : "你的腾讯云secretkey",
     Nonce:"",//随机数，用于请求API
     times:"",//unix timestamp，用于请求API
     //图片的Url则存在app.js的globalData里
@@ -96,7 +96,7 @@ Page({
     })
 
     //生成str字符串，用于计算signature
-    var str = "GETbda.tencentcloudapi.com/?Action=DetectBody&MaxBodyNum=10&Nonce="+Nonce+"&Region=ap-beijing&SecretId=AKIDrT1LRHz0Ytx58vBavDKxJsQidJ7v6aPS&Timestamp="+times+"&Url="+app.globalData.Url+"&Version=2020-03-24"
+    var str = "GETbda.tencentcloudapi.com/?Action=DetectBody&MaxBodyNum=10&Nonce="+Nonce+"&Region=ap-beijing&SecretId="+this.data.SecretId+"&Timestamp="+times+"&Url="+app.globalData.Url+"&Version=2020-03-24"
     //console.log("str",str)
 
 
@@ -119,7 +119,7 @@ Page({
         MaxBodyNum:10,
         Nonce:Nonce,
         Region:"ap-beijing",
-        SecretId:"AKIDrT1LRHz0Ytx58vBavDKxJsQidJ7v6aPS",
+        SecretId:this.data.SecretId,
         Signature:sign,
         Timestamp:times,
         Url:app.globalData.Url,
