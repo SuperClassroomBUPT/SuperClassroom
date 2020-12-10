@@ -2,7 +2,7 @@
 var app = getApp();
 Page({
   data: {
-    SecretId : "你的腾讯云secretkeysecretid",
+    SecretId : "你的腾讯云secretid",
     SecretKey : "你的腾讯云secretkey",
     Nonce:"",//随机数，用于请求API
     times:"",//unix timestamp，用于请求API
