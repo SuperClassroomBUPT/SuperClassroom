@@ -6,7 +6,10 @@
   font-size: large;
   font-weight: bold;
 }
-
+.camera{
+  margin: 30;
+  align-items: center;
+}
 .center-vertical-horizon {
   display: flex;
   justify-content: center;

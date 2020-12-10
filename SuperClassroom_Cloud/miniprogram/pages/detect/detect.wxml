@@ -1,4 +1,5 @@
 <camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
+<view style = "margin:5px"></view>
 <button type="primary" bindtap="takePhoto">拍照</button>
 
 <view class="flex-column">
