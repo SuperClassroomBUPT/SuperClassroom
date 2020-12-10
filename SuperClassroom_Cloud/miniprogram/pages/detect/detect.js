@@ -19,6 +19,19 @@ Page({
 
 
   onLoad: function () {
+    var that = this
+    setInterval(function(){
+      //循环执行，3秒1次
+      if(that.data.start){
+        //start控制是否拍照&识别
+        that.takePhoto()
+        setTimeout(function () {
+          //拍照到获得地址需要一定时间。如果不设置延时在调api时将无法获取url。
+          that.API()//调用api
+         }, 3000)//延迟时间
+      }
+    }, 3000)
+
   },
 
   switch:function(){
@@ -34,7 +47,7 @@ Page({
         start : true
       })
     }
-    console.log(this.data.start)
+    //console.log(this.data.start)
   },
 
   takePhoto() {
@@ -65,7 +78,7 @@ Page({
                 // if(app.globalData.v){
                   //v控制参数，见app.js
                 app.globalData.Url  = res.fileList[0].tempFileURL
-                console.log("urllllll",app.globalData.Url)
+                //console.log("urllllll",app.globalData.Url)
               // }
               }
             })
@@ -83,10 +96,7 @@ Page({
     })
     /*********************照相+获取url 结束***********************/
 
-    setTimeout(function () {//拍照到获得地址需要一定时间。如果不设置延时在调api时将无法获取url。
-      //要延时执行的代码
-      that.API()
-     }, 3000) //延迟时间 这里是2秒
+
   },
 
   
@@ -141,7 +151,7 @@ Page({
       },
       success: function(res) {
         console.log(res.data.Response.Error)
-         console.log("返回：",res.data.Response.BodyDetectResults)//成功则返回识别结果
+         //console.log("返回：",res.data.Response.BodyDetectResults)//成功则返回识别结果
         //console.log(res.data.Response.BodyDetectResults.nv_length)
             that.cal(res.data.Response.BodyDetectResults)
       },
