@@ -5,6 +5,10 @@
 
 # 项目：**智能教室灯光调节**
 
+
+
+
+
 ## 1 简介
 
 
@@ -100,7 +104,7 @@ https://github.com/naive0409/VeryFirstRepository
 
 
 
-## 7项目演示
+## 7 项目演示
 
 https://www.bilibili.com/video/BV1kp4y1z7rz/
 
