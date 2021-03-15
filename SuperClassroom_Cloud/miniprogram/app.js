@@ -23,34 +23,3 @@ App({
     }
   }
 })
-
-
-/**
-
-  "tabBar": {
-    "backgroundColor": "#ffffff",
-    "color": "#999999",
-    "selectedColor": "#cc1004",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "地图",
-        "iconPath": "pages/image/1.png",
-        "selectedIconPath": "pages/image/1.png"
-      },
-      {
-        "pagePath": "pages/2/2",
-        "text": "上课",
-        "iconPath": "pages/image/3.jpg",
-        "selectedIconPath": "pages/image/3.jpg"
-      },
-      {"pagePath": "pages/3/3",
-       "text": "食堂",
-       "iconPath": "pages/image/2.jpg",
-       "selectedIconPath": "pages/image/2.jpg"
-  }
-    ]
-  },
-
- */
