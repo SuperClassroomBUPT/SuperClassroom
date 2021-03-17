@@ -45,16 +45,19 @@ Page({
   onLoad: function () {
     var that = this
     setInterval(function(){
-      //循环执行，3秒1次
+
+      //循环执行
       if(that.data.start){
         //start控制是否拍照&识别
         that.takePhoto()
         setTimeout(function () {
           //拍照到获得地址需要一定时间。如果不设置延时在调api时将无法获取url。
           that.API()//调用api
-         }, 3000)//延迟时间
+         }, 5000)//延迟时间
       }
-    }, 3000)
+
+
+    }, 5000)
 
   },
 
@@ -94,16 +97,13 @@ Page({
             console.log("成功拍照并上传")
             //获取图片url用于人体识别
             var array = [res.fileID]
+            console.log("array",array)
             wx.cloud.getTempFileURL({//这个函数通过FileId来获取图片的Url
               fileList:array,//用数组来输入fileId
               success:function(res){
                 //url传到globaldata
-
-                // if(app.globalData.v){
-                  //v控制参数，见app.js
                 app.globalData.Url  = res.fileList[0].tempFileURL
-                //console.log("urllllll",app.globalData.Url)
-              // }
+                //console.log("刚刚拍摄的图片",app.globalData.Url)
               }
             })
           },
@@ -175,7 +175,7 @@ Page({
       },
       success: function(res) {
         //console.log(res.data.Response.Error)
-        console.log(res.data)
+        console.log("res.data",res.data)
          //console.log("返回：",res.data.Response.BodyDetectResults)//成功则返回识别结果
         //console.log(res.data.Response.BodyDetectResults.nv_length)
             that.cal(res.data.Response.BodyDetectResults)
@@ -186,7 +186,7 @@ Page({
     })
   },
   cal:function(arr){
-    // console.log("arr",arr);
+    //console.log("arr",arr);
     var arrx= new Array(arr.nv_length);
     var arry= new Array(arr.nv_length);
     var   x = new Array(0,0,0)

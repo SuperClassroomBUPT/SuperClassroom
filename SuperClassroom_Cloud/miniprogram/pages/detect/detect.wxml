@@ -65,7 +65,7 @@ module.exports.len = function(arr) {
   </view>
 </view>
 
-<!-- <view class="title">上次识别</view>
-<image mode="widthFix" src="{{src}}"></image> -->
+<view class="title">上次识别</view>
+<image mode="widthFix" src="{{src}}"></image>
 
 
