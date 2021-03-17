@@ -7,7 +7,8 @@
 
 #include <SoftwareSerial.h>
 SoftwareSerial blt(12, 13);
-//102RXD接收13TXD发送
+//12连接模块上TXD
+//13-RXD
 
 int a = 200;
 int b = 100;
@@ -31,9 +32,9 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, lit_o, NEO_GRB + NEO_KHZ800);
 void setup()
 {
   Serial.begin(9600);
+  Serial.println("蓝牙模块就绪");
   strip.begin();
   blt.begin(9600);
-  Serial.println("蓝牙模块就绪");
 
   //震动
   pinMode(vib_i, INPUT);
@@ -95,6 +96,16 @@ void loop()
     int a = blt.read();
     Serial.println(a);
     blt.println("data received");
+    //Serial.print(a);
   }
+
+
+/*
+AT
+AT+NAME=B1
+AR+CMODE=1
+AT+ROLE=0
+AT+PSWD=1234
+*/
 
 }

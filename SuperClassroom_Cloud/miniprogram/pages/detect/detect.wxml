@@ -1,29 +1,3 @@
-<camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
-<view style = "margin:5px"></view>
-<view>
-  <button type="primary" bindtap="switch">
-    <text wx:if="{{start}}">停止</text>
-    <text wx:if="!{{start}}">进行识别</text>
-  </button>
-</view>
-
-
-
-<view class="flex-column">
-  <view class="title" >
-    识别结果：
-  </view>
-  <view class="lmr">
-  左:{{left}}
-  中:{{mid}}
-  右:{{right}}
-  </view>
-</view>
-
-<!-- <view class="title">上次识别</view>
-<image mode="widthFix" src="{{src}}"></image> -->
-
-
 <!-- 蓝牙 -->
 <wxs module="utils">
 module.exports.max = function(n1, n2) {
@@ -66,3 +40,32 @@ module.exports.len = function(arr) {
     <view>特性值: {{item.value}}</view>
   </view>
 </view>
+<!-- 蓝牙 -->
+
+
+<camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
+<view style = "margin:5px"></view>
+<view>
+  <button type="primary" bindtap="switch">
+    <text wx:if="{{start}}">停止</text>
+    <text wx:if="!{{start}}">进行识别</text>
+  </button>
+</view>
+
+
+
+<view class="flex-column">
+  <view class="title" >
+    识别结果：
+  </view>
+  <view class="lmr">
+  左:{{left}}
+  中:{{mid}}
+  右:{{right}}
+  </view>
+</view>
+
+<!-- <view class="title">上次识别</view>
+<image mode="widthFix" src="{{src}}"></image> -->
+
+

@@ -394,10 +394,10 @@ Page({
       characteristicId: this._characteristicId,
       value: buffer,
       success(res){//CHANGED
-        console.log('writeBLECharacteristicValue success!',res)
+        console.log('writeBLECharacteristicValue success',res)
       },
-      fail(res){
-        console.log("writeBLECharacteristicValue failed!",res)
+      fail:function(res){
+        console.log("失败",res)
       }
     })
   },
