@@ -381,9 +381,15 @@ Page({
     })
   },
   writeBLECharacteristicValue() {
+    var data = [0xAA, 0xAB, 0xAC]
+    var buffer = new ArrayBuffer(data.length)
+    var dataView = new DataView(buffer)
+    data.forEach(function (item, index) {
+      dataView.setUint8(index, item)})
+
     // 向蓝牙设备发送一个0x00的16进制数据
-    let buffer = this.data.detArray//detarray
-    let dataView = new DataView(buffer)
+    //let buffer = this.data.detArray//detarray
+    //let dataView = new DataView(buffer)
     //dataView.setUint8(0, Math.random() * 255 | 0)//写入随机数
     wx.writeBLECharacteristicValue({
       deviceId: this._deviceId,
