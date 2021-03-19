@@ -1,111 +1,76 @@
 #include <Adafruit_NeoPixel.h>
-#ifdef __AVR__
-#include <avr/power.h> // Required for 16 MHz Adafruit Trinket
-#endif
-
-#define PIXELPIN 10
-
 #include <SoftwareSerial.h>
 SoftwareSerial blt(12, 13);
-//12连接模块上TXD
-//13-RXD
+//102RXD接收13TXD发送
 
-int a = 200;
-int b = 100;
-//两个亮度
-//震动
-#define vib_i  11
-#define vib_o  10
-//声音
-#define snd_i  A3
-#define snd_o  8
-//识别
-#define l  7
-#define m  6
-#define r  5
-//环境光
-#define lit_i  A3
-#define lit_o  9//首个LED连接单片机的引脚号
+unsigned long oldtime = 0;
+const int vib_i =  11, vib_o = 10;//震动
+#define snd_ia  A1//声音
+const int snd_id = 4, snd_o  = 8;
+const int l  = 7, m  = 6, r  = 5;//识别
+#define lit_i  A0//环境光
+const int lit_o  = 3;
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, lit_o, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel stripl = Adafruit_NeoPixel(10, l, NEO_GRB + NEO_KHZ800); //l
+Adafruit_NeoPixel stripm = Adafruit_NeoPixel(10, m, NEO_GRB + NEO_KHZ800); //m
+Adafruit_NeoPixel stripr = Adafruit_NeoPixel(10, r, NEO_GRB + NEO_KHZ800); //r
 
-void setup()
-{
+void setup() {
   Serial.begin(9600);
-  Serial.println("蓝牙模块就绪");
-  strip.begin();
-  blt.begin(9600);
-
-  //震动
-  pinMode(vib_i, INPUT);
-  pinMode(vib_o, OUTPUT);
-  //环境光
-  pinMode(lit_o, OUTPUT);
-  //识别
-  pinMode(r, OUTPUT); /*右*/
-  pinMode(m, OUTPUT); /*中*/
-  pinMode(l, OUTPUT); /*左*/
+  stripl.begin(); stripm.begin(); stripr.begin();
+  stripl.clear(); stripm.clear(); stripr.clear();
+  blt.begin(9600); Serial.println("蓝牙模块就绪");
+  pinMode(vib_i, INPUT); pinMode(vib_o, OUTPUT);//震动
+  pinMode(snd_ia, INPUT);pinMode(snd_id, INPUT); pinMode(snd_o, OUTPUT);//声音
+  pinMode(lit_o, OUTPUT);//环境光
+  pinMode(r, OUTPUT); pinMode(m, OUTPUT); pinMode(l, OUTPUT);//识别
+  for (int i = 1; i <= 10; i++) {
+    stripl.setPixelColor(i, stripl.Color(255, 255, 255));
+    stripm.setPixelColor(i, stripm.Color(255, 255, 255));
+    stripr.setPixelColor(i, stripr.Color(255, 255, 255));
+  } stripl.show(); stripm.show(); stripr.show();//三条灯全亮
 
 }
-void loop()
-{
+
+void loop() {
   //震动
-  if (digitalRead(vib_i))
-  {
+  float _vibin = digitalRead(vib_i);
+  //Serial.println(_vibin);
+  if (!_vibin) digitalWrite(vib_o, HIGH);
+
+  if (millis() - oldtime > 5000) {
+    oldtime = millis(); //更新时间点
     digitalWrite(vib_o, LOW);
+    
   }
-  else
-  {
-    digitalWrite(vib_o, HIGH);
-    delay(100);
-  }
+
 
   //环境光
-  int n = analogRead(lit_i);
-  Serial.println(n);
-  //  if (n >= a ) {
-  //    digitalWrite(lit_o, HIGH);
-  //  } else if (n <= b) {
-  //    digitalWrite(lit_o, LOW);
-  //    //delay(100);
-  //  } else {
-  //    digitalWrite(lit_o, HIGH);
-  //    delay(1);
-  //    digitalWrite(lit_o, LOW);
-  //    delay(1);
-  //  }
-
-  strip.setPixelColor(2, strip.Color(0, 255, 255));
-  strip.show();
+  float _litin = analogRead(lit_i);
+  int lit = abs(  (_litin - 700) * 0.25 );//亮度输出
+  analogWrite(lit_o, lit);
+  //stripl.setBrightness(lit);stripl.show();
 
 
   //声音
-  int i = analogRead(A0);
-  if (i > 100) {
-    digitalWrite(snd_o, HIGH);
-  }
-  else {
-    digitalWrite(snd_o, LOW);
-  }
-  delay(100);
-
-
+  //    int _sndin = analogRead(snd_ia);
+  //    //int _sndin = digitalRead(snd_id);
+  //    Serial.println(_sndin);
+  //    if (_sndin > 100) {
+  //      digitalWrite(snd_o, HIGH);
+  //    }
+  //    else {
+  //      digitalWrite(snd_o, LOW);
+  //    }
+  //    delay(100);
 
   //识别
-  if (blt.available() > 0) {
-    int a = blt.read();
-    Serial.println(a);
-    blt.println("data received");
-    //Serial.print(a);
-  }
-
-
-/*
-AT
-AT+NAME=B1
-AR+CMODE=1
-AT+ROLE=0
-AT+PSWD=1234
-*/
-
+  //  if (blt.available() > 0) {
+  //    int a = blt.read();
+  //    Serial.println(a);
+  //    blt.println("data received");
+  //  }
+  //  stripl.setBrightness(100);stripl.show();
+  //  stripm.setBrightness(200);stripm.show();
+  //  stripr.setBrightness(255);stripr.show();
 }

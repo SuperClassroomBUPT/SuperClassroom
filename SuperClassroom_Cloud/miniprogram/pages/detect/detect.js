@@ -32,6 +32,7 @@ Page({
     left:"",
     mid:"",
     right:"",
+    detArray:[],
 
     //控制识别开始和停止
     start:false,
@@ -53,12 +54,9 @@ Page({
         setTimeout(function () {
           //拍照到获得地址需要一定时间。如果不设置延时在调api时将无法获取url。
           that.API()//调用api
-         }, 5000)//延迟时间
+         }, 3000)//延迟时间
       }
-
-
-    }, 5000)
-
+    }, 3000)
   },
 
   switch:function(){
@@ -91,7 +89,7 @@ Page({
 
         //把图片上传到小程序云存储并获得url
         wx.cloud.uploadFile({
-          cloudPath:'detect/detect.png',
+          cloudPath:'detect/detect'+that.data.times+'.png',
           filePath:res.tempImagePath, // 文件路径
           success:res => {
             console.log("成功拍照并上传")
@@ -103,7 +101,7 @@ Page({
               success:function(res){
                 //url传到globaldata
                 app.globalData.Url  = res.fileList[0].tempFileURL
-                //console.log("刚刚拍摄的图片",app.globalData.Url)
+                console.log("刚刚拍摄的图片",app.globalData.Url)
               }
             })
           },
@@ -125,19 +123,16 @@ Page({
 
   
   API:function(){
-
     /**********************api文档************************
-
     https://cloud.tencent.com/document/product/1208/42972
-
     *****************************************************/
 
     //生成用于计算signature的字符串,然后调腾讯云人体识别api
     //signature是鉴权参数
     var data = this.data
     var app = getApp()
-    var Nonce = Math.floor(Math.random()*100000)
-    var times = (Date.parse(new Date()))/1000
+    var Nonce = Math.floor(Math.random()*100000)//Nonce随机数
+    var times = (Date.parse(new Date()))/1000//当前时间
     this.setData({
       Nonce:Nonce,
       times:times
@@ -210,10 +205,12 @@ Page({
     this.setData({
       left:x[0],
       mid:x[1],
-      right:x[2]
+      right:x[2],
+      detArray:x
     })
 
-    console.log(this.data.left,this.data.mid,this.data.right)
+    console.log("l,m,r",this.data.left,this.data.mid,this.data.right)
+    console.log("detarray",this.data.detArray)
     // console.log("arrx",arrx)
     // console.log("arry",arry)
   },
@@ -385,9 +382,9 @@ Page({
   },
   writeBLECharacteristicValue() {
     // 向蓝牙设备发送一个0x00的16进制数据
-    let buffer = new ArrayBuffer(1)
+    let buffer = this.data.detArray//detarray
     let dataView = new DataView(buffer)
-    dataView.setUint8(0, Math.random() * 255 | 0)//写入随机数
+    //dataView.setUint8(0, Math.random() * 255 | 0)//写入随机数
     wx.writeBLECharacteristicValue({
       deviceId: this._deviceId,
       serviceId: this._serviceId,

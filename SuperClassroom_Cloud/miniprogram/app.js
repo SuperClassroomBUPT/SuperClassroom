@@ -15,7 +15,7 @@ App({
     }
 
     this.globalData = {
-      Url : "https://636c-cloud-1ga5cv35f871c6b0-1303849977.tcb.qcloud.la/detect/detect.png?sign=a4b96c0f754c1f9de0f969724dfbf929&t=1607522459",
+      Url : "",
 
       //用于图像识别的图片url
 
