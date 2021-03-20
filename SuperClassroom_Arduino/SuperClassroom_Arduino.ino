@@ -7,7 +7,7 @@ unsigned long oldtime = 0;
 const int vib_i =  11, vib_o = 10;//震动
 #define snd_ia  A1//声音
 const int snd_id = 4, snd_o  = 8;
-const int l  = 7, m  = 6, r  = 5;//识别
+const int l  = 7, m  = 6, r  = 5;
 #define lit_i  A0//环境光
 const int lit_o  = 3;
 
@@ -28,7 +28,8 @@ void setup() {
     stripl.setPixelColor(i, stripl.Color(255, 255, 255));
     stripm.setPixelColor(i, stripm.Color(255, 255, 255));
     stripr.setPixelColor(i, stripr.Color(255, 255, 255));
-  } stripl.show(); stripm.show(); stripr.show();//三条灯全亮
+  }
+  stripl.show(); stripm.show(); stripr.show();//三条灯全亮
 
 }
 
@@ -36,20 +37,26 @@ void loop() {
   //震动
   float _vibin = digitalRead(vib_i);
   //Serial.println(_vibin);
-  if (!_vibin) digitalWrite(vib_o, HIGH);
+  if (!_vibin) {
+    digitalWrite(vib_o, HIGH);
+    stripm.setBrightness(255);
+    stripm.show();
+  }
 
   if (millis() - oldtime > 5000) {
     oldtime = millis(); //更新时间点
     digitalWrite(vib_o, LOW);
-
+    stripm.setBrightness(1);
+    stripm.show();
   }
 
 
   //环境光
   float _litin = analogRead(lit_i);
-  int lit = abs(  (_litin - 700) * 0.25 );//亮度输出
-  analogWrite(lit_o, lit);
-  //stripl.setBrightness(lit);stripl.show();
+  //Serial.println(_litin);
+  int lit = abs(  (_litin - 500) * 0.25 );//亮度输出
+  //analogWrite(lit_o, lit);
+  stripl.setBrightness(lit); stripl.show();
 
 
   //声音
@@ -69,8 +76,21 @@ void loop() {
     int a = blt.read();
     Serial.println(a);
     blt.println("data received");
+    //    switch (a) {
+    //      case 4:
+    //        break;
+    //      case 3:
+    //        break;
+    //      case 2:
+    //        break;
+    //      case 1:
+    //        break;
+    //      case 0:
+    //        break;
+    //    }
   }
-  stripl.setBrightness(100); stripl.show();
-  stripm.setBrightness(200); stripm.show();
-  stripr.setBrightness(255); stripr.show();
+  //4~255,3~128,2^64,1~32,0~0
+  //a[0]*(255/4)
+  //stripl.setBrightness(0); stripm.setBrightness(200);  stripr.setBrightness(255);
+  //stripl.show(); stripm.show(); stripr.show();
 }
