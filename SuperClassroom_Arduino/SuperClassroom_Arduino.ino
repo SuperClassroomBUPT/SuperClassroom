@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <SoftwareSerial.h>
 SoftwareSerial blt(12, 13);
-//102RXD接收13TXD发送
+//12RXD接收13TXD发送
 
 unsigned long oldtime = 0;
 const int vib_i =  11, vib_o = 10;//震动
@@ -21,7 +21,7 @@ void setup() {
   stripl.clear(); stripm.clear(); stripr.clear();
   blt.begin(9600); Serial.println("蓝牙模块就绪");
   pinMode(vib_i, INPUT); pinMode(vib_o, OUTPUT);//震动
-  pinMode(snd_ia, INPUT);pinMode(snd_id, INPUT); pinMode(snd_o, OUTPUT);//声音
+  pinMode(snd_ia, INPUT); pinMode(snd_id, INPUT); pinMode(snd_o, OUTPUT); //声音
   pinMode(lit_o, OUTPUT);//环境光
   pinMode(r, OUTPUT); pinMode(m, OUTPUT); pinMode(l, OUTPUT);//识别
   for (int i = 1; i <= 10; i++) {
@@ -41,7 +41,7 @@ void loop() {
   if (millis() - oldtime > 5000) {
     oldtime = millis(); //更新时间点
     digitalWrite(vib_o, LOW);
-    
+
   }
 
 
@@ -65,12 +65,12 @@ void loop() {
   //    delay(100);
 
   //识别
-  //  if (blt.available() > 0) {
-  //    int a = blt.read();
-  //    Serial.println(a);
-  //    blt.println("data received");
-  //  }
-  //  stripl.setBrightness(100);stripl.show();
-  //  stripm.setBrightness(200);stripm.show();
-  //  stripr.setBrightness(255);stripr.show();
+  if (blt.available() > 0) {
+    int a = blt.read();
+    Serial.println(a);
+    blt.println("data received");
+  }
+  stripl.setBrightness(100); stripl.show();
+  stripm.setBrightness(200); stripm.show();
+  stripr.setBrightness(255); stripr.show();
 }
