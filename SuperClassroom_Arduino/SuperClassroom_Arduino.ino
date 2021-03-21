@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #include <SoftwareSerial.h>
-SoftwareSerial blt(12, 13);
+SoftwareSerial blt(0, 1);
 //12RXD接收13TXD发送
 
 unsigned long oldtime = 0;
@@ -73,9 +73,9 @@ void loop() {
 
   //识别
   if (blt.available() > 0) {
-    int a = blt.read();
+    unsigned int a = blt.read();
     Serial.println(a);
-    blt.println("data received");
+    //blt.println("data received");
     //    switch (a) {
     //      case 4:
     //        break;
