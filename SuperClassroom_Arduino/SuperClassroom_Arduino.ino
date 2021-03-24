@@ -46,30 +46,26 @@ void loop() {
   if (millis() - oldtime > 5000) {
     oldtime = millis(); //更新时间点
     digitalWrite(vib_o, LOW);
-    stripm.setBrightness(1);
-    stripm.show();
+    stripm.setBrightness(1);stripm.show();
+    stripr.setBrightness(1);stripr.show();
   }
 
 
   //环境光
   float _litin = analogRead(lit_i);
   //Serial.println(_litin);
-  int lit = abs(  (_litin - 500) * 0.25 );//亮度输出
+  int lit = 1 + abs(  (_litin - 500) * 0.25 );//亮度输出
   //analogWrite(lit_o, lit);
   stripl.setBrightness(lit); stripl.show();
 
 
   //声音
-  //    int _sndin = analogRead(snd_ia);
-  //    //int _sndin = digitalRead(snd_id);
-  //    Serial.println(_sndin);
-  //    if (_sndin > 100) {
-  //      digitalWrite(snd_o, HIGH);
-  //    }
-  //    else {
-  //      digitalWrite(snd_o, LOW);
-  //    }
-  //    delay(100);
+  int _sndin = analogRead(snd_ia);
+  //int _sndin = digitalRead(snd_id);
+  Serial.println(_sndin);
+  if (_sndin > 100) {
+    stripr.setBrightness(255);stripr.show();
+  }
 
   //识别
   if (blt.available() > 0) {
