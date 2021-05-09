@@ -3,12 +3,14 @@
     "pages/detect/detect",
     "pages/index/index"
   ],
-  "tabBar": {
+  "tabBar":
+   {
     "backgroundColor": "#ffffff",
     "color": "#999999",
     "selectedColor": "#cc1004",
     "borderStyle": "black",
-    "list": [
+    "list": 
+    [
       {
         "pagePath": "pages/detect/detect",
         "text": "识别",
@@ -18,11 +20,12 @@
       },
       {"pagePath": "pages/index/index",
        "text": "其他"
-  }
+      }
     ]
   },
 
-  "window": {
+  "window": 
+  {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",

@@ -21,10 +21,10 @@ function ab2hex(buffer) {
 }
 
 Page({
-  data: {
-    SecretId : "",
-    SecretKey : "",
-    Nonce:"",//随机数，用于请求API
+  data:{
+    SecretId : "AKIDBexFSTPNFxviK0ktRmax75sVsRtEOoBQ",
+    SecretKey : "JPJxPg1Vq591gUG2CBJDrOiQwEOHvc7P",
+    Nonce:"",//随机数，用于请求APIxxxxxxxxxxxxxxxxxxxxxxxxxx
     times:"",//unix timestamp，用于请求API
             //图片的Url存在app.js的globalData里
 
@@ -208,7 +208,6 @@ Page({
       right:x[2],
       detArray:x
     })
-
     console.log("l,m,r",this.data.left,this.data.mid,this.data.right)
     console.log("detarray",this.data.detArray)
     // console.log("arrx",arrx)
@@ -381,16 +380,16 @@ Page({
     })
   },
   writeBLECharacteristicValue() {
-    var data = [0xAA, 0xAB, 0xAC]
-    var buffer = new ArrayBuffer(data.length)
+    var datax = [this.data.left,this.data.mid,this.data.right]
+    var buffer = new ArrayBuffer(datax.length)
     var dataView = new DataView(buffer)
-    data.forEach(function (item, index) {
+    datax.forEach(function (item, index) {
       dataView.setUint8(index, item)})
 
     // 向蓝牙设备发送一个0x00的16进制数据
-    //let buffer = this.data.detArray//detarray
-    //let dataView = new DataView(buffer)
-    //dataView.setUint8(0, Math.random() * 255 | 0)//写入随机数
+    // let buffer = this.data.detArray//detarray
+    // let dataView = new DataView(buffer)
+    // dataView.setUint8(0, Math.random() * 255 | 0)//写入随机数
     wx.writeBLECharacteristicValue({
       deviceId: this._deviceId,
       serviceId: this._serviceId,
