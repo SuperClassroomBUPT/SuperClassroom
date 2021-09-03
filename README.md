@@ -1,5 +1,6 @@
 # SuperClassroom
-我在GitHub上的第一个Repository
+
+[→已转移至gitee←](https://gitee.com/SuperClassroom/SuperClassroom)
 
 
 
